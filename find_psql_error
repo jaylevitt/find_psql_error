@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+INVERSE="\e[7m"
+NORMAL="\e[0m"
+
+error = %r{
+  psql:
+  (?<file>[^:]+):
+  (?<line>\d+):
+  \s+ERROR:.*at\scharacter\s+
+  (?<pos>\d+)
+}x
+args = error.match(ARGV[0])
+last_line = args[:line].to_i - 1
+pos = args[:pos].to_i
+
+lines = IO.readlines(args[:file])
+declaration = lines[0..last_line].reverse.find_index {|l| l =~ /create (or replace)? function/i }
+function = lines[(last_line - declaration)..last_line].join
+
+puts function[(pos - 100)..(pos - 1)] + INVERSE + function[pos] + NORMAL + function[(pos + 1)..(pos + 100)]
