@@ -8,4 +8,4 @@
     
 # And I get this:
 
-![screen shot](http://github.com/jaylevitt/find_psql_error/screen-shot.png)
+![screen shot](http://github.com/jaylevitt/find_psql_error/raw/master/screen-shot.png)
