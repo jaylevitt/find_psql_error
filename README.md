@@ -9,3 +9,5 @@
 ## And I get this:
 
 ![screen shot](http://github.com/jaylevitt/find_psql_error/raw/master/screen-shot.png)
+
+**Requires Ruby 1.9.**
