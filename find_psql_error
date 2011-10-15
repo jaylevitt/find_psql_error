@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-INVERSE="\e[7m"
-NORMAL="\e[0m"
+inverse=`tput smso` rescue "\e[7m"
+normal=`tput rmso`  rescue "\e[0m"
 
 error = %r{
   psql:
@@ -18,4 +18,4 @@ lines = IO.readlines(args[:file])
 declaration = lines[0..last_line].reverse.find_index {|l| l =~ /create (or replace)? function/i }
 function = lines[(last_line - declaration)..last_line].join
 
-puts function[(pos - 100)..(pos - 1)] + INVERSE + function[pos] + NORMAL + function[(pos + 1)..(pos + 100)]
+puts function[(pos - 100)..(pos - 1)] + inverse + function[pos] + normal + function[(pos + 1)..(pos + 100)]
